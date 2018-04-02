@@ -1,0 +1,18 @@
+<div class="container">
+  <section class="login-box">
+    <h2>
+      欢迎登录福心公益管理后台
+    </h2>
+    <el-form class="login-form" :model="loginFormModel" :rules="loginFormRules" ref="loginForm">
+      <el-form-item label="登录名" prop="userName">
+        <el-input v-model="loginFormModel.userName" placeholder="请输入登录名" clearable autofocus></el-input>
+      </el-form-item>
+      <el-form-item label="登录密码" prop="password">
+        <el-input v-model="loginFormModel.password" type="password" placeholder="请输入登录密码" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button class="login-btn" type="primary" @click="postForm">登录</el-button>
+      </el-form-item>
+    </el-form>
+  </section>
+</div>

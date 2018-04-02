@@ -1,0 +1,73 @@
+<Layout>
+  <div class="container">
+    <section class="base-info content-between">
+      <div class="manager-info content-right">
+        <div>
+          <img src='./timg.jpg' />
+        </div>
+        <ul>
+          <li>
+            <h3>我的资料</h3>
+          </li>
+          <li>登录名：{{manager.manager_login_name}}</li>
+          <li>姓名：{{manager.manager_name}}</li>
+          <li>角色：{{manager.role_name}}</li>
+        </ul>
+        <el-button class="ml20 changepassword" size="small" type="primary" @click="dialogVisible = true">修改密码</el-button>
+      </div>
+      <div class="user-info content-right">
+        <div>
+          <p class="title">总用户数</p>
+          <p class="num">{{userCount}}</p>
+        </div>
+        <div>
+          <p class="title">进行中活动数</p>
+          <p class="num">{{activityCounts}}</p>
+        </div>
+      </div>
+    </section>
+    <hr/>
+    <section>
+      <el-table border highlight-current-row :data="activityList">
+        <el-table-column label="活动名称">
+          <template slot-scope="scope">
+            <a href="#">
+              <router-link :to="{name: 'acctivityDetail', params: {id: scope.row.activity_id}}">
+                {{scope.row.activity_name}}
+              </router-link>
+            </a>
+          </template>
+        </el-table-column>
+        <el-table-column label="活动负责人" prop="activity_lead"></el-table-column>
+        <el-table-column label="开始时间" prop="activity_start_time"></el-table-column>
+        <el-table-column label="截止时间" prop="activity_end_time"></el-table-column>
+        <el-table-column label="报名人数" prop="join_count"></el-table-column>
+        <el-table-column label="活动发布人" prop="activity_lead"></el-table-column>
+        <el-table-column label="最近修改时间" prop="activity_change_lasttime"></el-table-column>
+      </el-table>
+      <div class="mt20 content-left">
+        <el-pagination @size-change="changePageSize" @current-change="changeCurrentPage" :current-page="currentPage" :page-sizes="[10, 30, 50, 100]"
+          :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="pageTotal">
+        </el-pagination>
+      </div>
+    </section>
+
+    <el-dialog title="修改密码" :visible.sync="dialogVisible" width="500px">
+      <el-form class="form" :model="changPasswordModel" :rules="changPasswordRules" ref="changPassword" label-position="left" label-width="100px">
+        <el-form-item label="原密码" prop="oldPassword">
+          <el-input v-model="changPasswordModel.oldPassword" type="password" placeholder="请输入原密码" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="newpassword">
+          <el-input v-model="changPasswordModel.newpassword" type="password" placeholder="请输入新密码" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="确认新密码" prop="repassword">
+          <el-input v-model="changPasswordModel.repassword" type="password" placeholder="请输入确认新密码"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="postChangPassword">提交</el-button>
+          <el-button type="danger" @click="resetChangPassword">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </div>
+</Layout>

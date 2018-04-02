@@ -1,0 +1,16 @@
+.header {
+  background: #409eff;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 60px;
+  display: flex;
+  justify-content: space-between;
+
+  .el-dropdown-link {
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+.el-aside {
+  background: #ffffff;
+}
